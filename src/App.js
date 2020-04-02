@@ -8,6 +8,7 @@ import {
 } from "./store/selectors";
 import {MoviesConnected} from "./components/movies";
 import {Directors} from "./components/directors";
+import {COVID19} from "./components/covid19";
 import {increment, decrement, asyncIncrement, changeTheme} from "./store/actionCreators";
 import './App.css';
 import './bootstrap.css';
@@ -60,6 +61,10 @@ const App = ({counter, increment, decrement, asyncIncrement, changeTheme, theme,
                 <MoviesConnected />
 
                 <Directors />
+            </div>
+
+            <div className="flex">
+                <COVID19 />
             </div>
         </div>
     </div>
