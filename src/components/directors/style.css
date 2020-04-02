@@ -1,0 +1,23 @@
+.movies__add {
+    margin-top: 1em;
+}
+
+.movies__input,
+.movies__button {
+    margin-right: 10px;
+    max-width: 150px;
+}
+
+.movies__message-status {
+    position: absolute;
+    top: 100px;
+    left: 43%;
+    border-radius: 5px;
+    color: white;
+    padding: 1em;
+}
+
+.movies__search {
+    width: 100%;
+    margin-bottom: 10px;
+}
