@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "./style.css";
 
-class COVID19 extends React.PureComponent {
+export class COVID19 extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -47,7 +47,7 @@ class COVID19 extends React.PureComponent {
                         const lethal = country?.latest_data?.calculated?.death_rate?.toFixed(2);
 
                         return (
-                            <tr>
+                            <tr key={country?.name}>
                                 <td>{country?.name}</td>
                                 <td>{`${hours}:${minutes}`}</td>
                                 <td>{`${country?.today?.deaths} / ${country?.today?.confirmed}`}</td>
@@ -63,5 +63,3 @@ class COVID19 extends React.PureComponent {
         ) : null;
     }
 }
-
-export {COVID19}

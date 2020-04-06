@@ -4,6 +4,7 @@ const {GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt, G
 
 const Movies = require("./models/movie");
 const Directors = require("./models/director");
+const Country = require("./models/country");
 
 const MovieType = new GraphQLObjectType({
     name: "Movie",
@@ -34,6 +35,29 @@ const DirectorType = new GraphQLObjectType({
                 })
             }
         }
+    }),
+});
+
+const CountryType = new GraphQLObjectType({
+    name: "Country",
+    fields: () => ({
+        coordinates: {
+            latitude: {type: GraphQLInt},
+            longitude: {type: GraphQLInt},
+        },
+        name: {type: GraphQLString},
+        updated_at: {type: GraphQLString},
+        today: {
+            deaths: {type: GraphQLInt},
+            confirmed: {type: GraphQLInt},
+        },
+        latest_data: {
+            deaths: {type: GraphQLInt},
+            confirmed: {type: GraphQLInt},
+        },
+        calculated: {
+            death_rate: {type: GraphQLInt},
+        },
     }),
 });
 
@@ -78,6 +102,41 @@ const Mutation = new GraphQLObjectType({
                     directorId: args.directorId,
                 });
                 return movie.save();
+            }
+        },
+        addCountry: {
+            type: CountryType,
+            args: {
+                coordinates: {
+                    // TODO: ПРОДОЛЖИТЬ
+                    type: GraphQLObjectType,
+                    latitude: {type: GraphQLInt},
+                    longitude: {type: GraphQLInt},
+                },
+                name: {type: GraphQLString},
+                updated_at: {type: GraphQLString},
+                today: {
+                    deaths: {type: GraphQLInt},
+                    confirmed: {type: GraphQLInt},
+                },
+                latest_data: {
+                    deaths: {type: GraphQLInt},
+                    confirmed: {type: GraphQLInt},
+                },
+                calculated: {
+                    death_rate: {type: GraphQLInt},
+                },
+            },
+            resolve(parent, {coordinates, name, updated_at, today, latest_data, calculated}) {
+                const country = new Country({
+                    coordinates,
+                    name,
+                    updated_at,
+                    today,
+                    latest_data,
+                    calculated,
+                });
+                return country.save();
             }
         },
         deleteDirector: {
